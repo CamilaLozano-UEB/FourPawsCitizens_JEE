@@ -8,10 +8,22 @@
 
 	<form action="login" method="post">
 		<fieldset>
-			<legend>Fomulario de aut</legend>
+			<legend>Inicio de Sesión</legend>
 			<label for="userName">Usuario:</label> <br> <input type="text"
 				name="userName" size="30" id="userName" placeholder="Ej: Nicolás"
 				required>
+		</fieldset>
+	</form>
+
+	<form action="CreateForm" method="post">
+		<fieldset>
+			<legend>Formulario de Carga de Fotografias</legend>
+			<br> 
+			<label for="imageUpdate"> Imagen de la mascota: </label> <br> <input
+				type="file" name="imageUpdate" id="imageUpdate" required> <br><br><label
+				for="Description">Descripción de la fotografía: </label> <br> <input
+				type="text" name="Description" id="Description"
+				placeholder="Fotografia de un pastór belga" size="30" required>
 		</fieldset>
 	</form>
 
