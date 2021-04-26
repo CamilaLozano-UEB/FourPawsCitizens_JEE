@@ -14,10 +14,15 @@
 			<legend>Fomulario de autenticación</legend>
 			<label for="userName">Usuario:</label> <br> <input id="userName"
 				type="text" name="userName" size="30" id="userName"
-				placeholder="Ej: Nicolás" required>
-			<button type="button" class="btn btn-primary" itemref="index.html">Submit</button>
+				placeholder="Ej: Nicolás" required> <a type="button"
+				class="btn btn-primary" onclick="href()" href="index.html">Submit</a>
 		</fieldset>
 	</form>
 
+	<script type="text/javascript">
+		function href() {
+			window.location.href = "login-with-cookies";
+		}
+	</script>
 </body>
 </html>
