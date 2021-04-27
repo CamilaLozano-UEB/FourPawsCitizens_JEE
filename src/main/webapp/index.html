@@ -22,7 +22,13 @@
 	<script type="text/javascript">
 		function verga() {
 			var files = document.getElementById("imageUpdate").files;
-			console.log(files[0].name);
+			var mimeType = files[0].name.split(".")[files[0].name.split(".").length - 1]
+					.toUpperCase();
+			if (mimeType !== "JPG" && mimeType !== "PNG") {
+				alert("El archivo seleccionado no es una imagen");
+			} else {
+				console.log("alguna vaina");
+			}
 		}
 	</script>
 
