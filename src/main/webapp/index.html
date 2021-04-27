@@ -3,19 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Login Servlet</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <body>
 	<form action="CreateForm" method="post">
 		<fieldset>
 			<legend>Formulario de Carga de Fotografias</legend>
-			<br> 
-			<label for="imageUpdate"> Imagen de la mascota: </label> <br> <input
-				type="file" name="imageUpdate" id="imageUpdate" required> <br><br><label
-				for="Description">Descripción de la fotografía: </label> <br> <input
-				type="text" name="Description" id="Description"
-				placeholder="Fotografia de un pastór belga" size="30" required>
+			<br> <label for="imageUpdate"> Imagen de la mascota: </label> <br>
+			<input type="file" name="imageUpdate" id="imageUpdate" required>
+			<br> <br> <label for="Description">Descripción de
+				la fotografía: </label> <br> <input type="text" name="Description"
+				id="Description" placeholder="Fotografia de un pastór belga"
+				size="30" required>
+			<button type="button" class="btn btn-primary" onclick="verga()">Subir</button>
 		</fieldset>
 	</form>
+	<script type="text/javascript">
+		function verga() {
+			var files = document.getElementById("imageUpdate").files;
+			console.log(files[0].name);
+		}
+	</script>
 
 </body>
 </html>
