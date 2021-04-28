@@ -16,11 +16,11 @@
 				la fotografía: </label> <br> <input type="text" name="Description"
 				id="Description" placeholder="Fotografia de un pastór belga"
 				size="30" required>
-			<button type="button" class="btn btn-primary" onclick="verga()">Subir</button>
+			<button type="button" class="btn btn-primary" onclick="verificate()">Subir</button>
 		</fieldset>
 	</form>
 	<script type="text/javascript">
-		function verga() {
+		function verificate() {
 			var files = document.getElementById("imageUpdate").files;
 			var mimeType = files[0].name.split(".")[files[0].name.split(".").length - 1]
 					.toUpperCase();
