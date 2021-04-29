@@ -13,13 +13,50 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Random;
 
 @MultipartConfig
 @WebServlet(name = "UserUpload", urlPatterns = { "/user-upload" })
 public class UserUpload extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+
+	public String getNameAlfaNumeric() {
+
+		byte[] bytearray = new byte[256];
+		String chain;
+		StringBuffer namePhoto;
+		String theAlphaNumericLower;
+		String theAlphaNumericUpper;
+		int i = 28;
+
+		new Random().nextBytes(bytearray);
+		chain = new String(bytearray, Charset.forName("UTF-8"));
+
+		namePhoto = new StringBuffer();
+
+		theAlphaNumericLower = chain.replaceAll("[^A-Z0-9]", "").toLowerCase();
+		theAlphaNumericUpper = chain.replaceAll("[^A-Z0-9]", "");
+
+		for (int m = 0; m < theAlphaNumericLower.length(); m++) {
+
+			if (Character.isLetter(theAlphaNumericLower.charAt(m)) && (i > 0)
+					|| Character.isDigit(theAlphaNumericLower.charAt(m)) && (i > 0)
+					|| Character.isLetter(theAlphaNumericUpper.charAt(m)) && (i > 0)
+					|| Character.isDigit(theAlphaNumericUpper.charAt(m)) && (i > 0)) {
+				if (i % 2 == 0) {
+					namePhoto.append(theAlphaNumericUpper.charAt(m));
+				} else {
+					namePhoto.append(theAlphaNumericLower.charAt(m));
+				}
+				i--;
+			}
+		}
+
+		return namePhoto.toString();
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
