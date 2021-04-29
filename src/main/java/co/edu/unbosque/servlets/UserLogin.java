@@ -19,6 +19,7 @@ public class UserLogin extends HttpServlet {
 			Cookie c1 = new Cookie("userName", name);
 			// Adding the cookies to response header
 			response.addCookie(c1);
+            response.sendRedirect(request.getContextPath() + "/index.html");
 		} catch (Exception exp) {
 			System.out.println(exp);
 		}

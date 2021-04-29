@@ -7,7 +7,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <body>
-	<form action="CreateForm" method="post">
+	<form action="user-upload" method="post" enctype="multipart/form-data">
 		<fieldset>
 			<legend>Formulario de Carga de Fotografias</legend>
 			<br> <label for="imageUpdate"> Imagen de la mascota: </label> <br>
@@ -15,8 +15,8 @@
 			<br> <br> <label for="Description">Descripción de
 				la fotografía: </label> <br> <input type="text" name="Description"
 				id="Description" placeholder="Fotografia de un pastór belga"
-				size="30" required>
-			<button type="button" class="btn btn-primary" onclick="verificate()">Subir</button>
+				size="30" required> <input type="submit"
+				class="btn btn-primary" value="Upload" onclick="verificate()">
 		</fieldset>
 	</form>
 	<script type="text/javascript">
@@ -27,7 +27,7 @@
 			if (mimeType !== "JPG" && mimeType !== "PNG") {
 				alert("El archivo seleccionado no es una imagen");
 			} else {
-				console.log("alguna vaina");
+				window.location.href = "user-upload";
 			}
 		}
 	</script>
