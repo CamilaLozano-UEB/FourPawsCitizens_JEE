@@ -12,7 +12,7 @@
 	<br>
 	<dt><h2><em> 3. Link del repositorio de github </em></h2></dt>
 	<br>
-	<dd>https://github.com/CamilaLozano-UEB/FourPawsCitizens_Server</dd>
+	<dd>https://github.com/CamilaLozano-UEB/FourPawsCitizens_JEE</dd>
 	<br>
 	<dt><h2><em> 4. Lenguaje de Codificación </em></h2></dt>
 	<br>
