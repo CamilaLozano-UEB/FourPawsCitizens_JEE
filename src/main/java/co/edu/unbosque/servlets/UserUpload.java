@@ -3,17 +3,22 @@ package co.edu.unbosque.servlets;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import edu.unbosque.services.UploadService;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -23,7 +28,46 @@ public class UserUpload extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	public String getNameAlfaNumeric() {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		DiskFileItemFactory factory = new DiskFileItemFactory(1024 * 1024 * 3,
+				new File(System.getProperty("java.io.tmpdir")));
+
+		ServletFileUpload upload = new ServletFileUpload(factory);
+
+		String uploadPath = getServletContext().getRealPath("./") + File.separator + "Images";
+
+		File uploadDir = new File(uploadPath);
+		if (!uploadDir.exists())
+			uploadDir.mkdirs();
+
+		List<FileItem> formItems;
+
+		try {
+			formItems = upload.parseRequest(request);
+
+			String fileName = new File(formItems.get(0).getName()).getName();
+			String filePath = uploadPath + File.separator + getNameAlfaNumeric()
+					+ fileName.substring(fileName.lastIndexOf("."), fileName.length());
+
+			formItems.get(0).write(new File(filePath));
+
+			UploadService uploadService = new UploadService();
+			Cookie[] cookies = request.getCookies();
+			System.out.println(filePath);
+
+			uploadService.storeRelation(getServletContext().getRealPath("./") + File.separator + "Relation",
+					cookies[0].getValue(), new Date().toString(), filePath, formItems.get(1).getString("UTF-8"));
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	private String getNameAlfaNumeric() {
 
 		byte[] bytearray = new byte[256];
 		String chain;
@@ -58,43 +102,4 @@ public class UserUpload extends HttpServlet {
 		return namePhoto.toString();
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		if (ServletFileUpload.isMultipartContent(request)) {
-
-			DiskFileItemFactory factory = new DiskFileItemFactory();
-			factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
-
-			ServletFileUpload upload = new ServletFileUpload(factory);
-			String uploadPath = getServletContext().getRealPath("./") + File.separator + "images";
-			System.out.println(uploadPath);
-			File uploadDir = new File(uploadPath);
-			if (!uploadDir.exists())
-				uploadDir.mkdirs();
-
-			try {
-				List<FileItem> formItems = upload.parseRequest(request);
-
-				if (formItems != null && formItems.size() > 0) {
-					for (FileItem item : formItems) {
-						if (!item.isFormField()) {
-							String fileName = new File(item.getName()).getName();
-							String filePath = uploadPath + File.separator + fileName;
-							File storeFile = new File(filePath);
-							System.out.println(storeFile);
-							item.write(storeFile);
-							System.out.println(storeFile.getAbsolutePath());
-
-							System.out.println("Sirve");
-							request.setAttribute("message", "File " + fileName + " has uploaded successfully!");
-						}
-					}
-				}
-			} catch (Exception ex) {
-				System.out.println("asdsadsadasddfghjkujyhtgrfedsa");
-				request.setAttribute("message", "There was an error: " + ex.getMessage());
-			}
-		}
-	}
 }
