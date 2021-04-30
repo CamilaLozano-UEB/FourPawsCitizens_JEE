@@ -4,33 +4,40 @@
 <meta charset="UTF-8">
 <title>Login Servlet</title>
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css%22%3E
 </head>
 <body>
-	<form action="user-upload" method="post" enctype="multipart/form-data">
-		<fieldset>
-			<legend>Formulario de Carga de Fotografias</legend>
-			<br> <label for="imageUpdate"> Imagen de la mascota: </label> <br>
-			<input type="file" name="imageUpdate" id="imageUpdate" required>
-			<br> <br> <label for="Description">Descripción de
-				la fotografía: </label> <br> <input type="text" name="Description"
-				id="Description" placeholder="Fotografia de un pastór belga"
-				size="30" required> <input type="submit"
-				class="btn btn-primary" value="Upload" onclick="verificate()">
-		</fieldset>
-	</form>
-	<script type="text/javascript">
-		function verificate() {
-			var files = document.getElementById("imageUpdate").files;
-			var mimeType = files[0].name.split(".")[files[0].name.split(".").length - 1]
-					.toUpperCase();
-			if (mimeType !== "JPG" && mimeType !== "PNG") {
-				alert("El archivo seleccionado no es una imagen");
-			} else {
-				window.location.href = "user-upload";
-			}
-		}
-	</script>
+    <form action="user-upload" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Formulario de Carga de Fotografias</legend>
+            <br> <label for="imageUpdate"> Imagen de la mascota: </label> <br>
+            <input type="file" name="imageUpdate" id="imageUpdate" required>
+            <br> <br> <label for="Description">Descripción de
+                la fotografía: </label> <br> <input type="text" name="Description"
+                id="Description" placeholder="Fotografia de un pastór belga"
+                size="30" required> <input type="submit"
+                class="btn btn-primary" value="Upload" onclick="verificate()">
+        </fieldset>
+    </form>
+    <script type="text/javascript">
+        function verificate() {
+            var files = document.getElementById("imageUpdate").files;
+            if (files[0] !== undefined
+                    && document.getElementById("Description").textContent !== undefined) {
+
+                var mimeType = files[0].name.split(".")[files[0].name
+                        .split(".").length - 1].toUpperCase();
+                if (mimeType !== "JPG" && mimeType !== "PNG") {
+                    alert("El archivo seleccionado no es una imagen");
+                } else {
+                    window.location.href = "user-upload";
+                }
+            } else {
+                alert("Complete los campos requeridos");
+            }
+
+        }
+    </script>
 
 </body>
-</html>
+</html>l>

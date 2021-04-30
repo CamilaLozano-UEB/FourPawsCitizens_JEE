@@ -29,6 +29,12 @@
 			<version>3.0.1</version>
 		</dependency>
 		<dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>javax.ejb-api</artifactId>
+            <version>3.2.2</version>
+            <scope>provided</scope>
+        </dependency>
+		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
