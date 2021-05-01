@@ -51,7 +51,7 @@ public class UserUpload extends HttpServlet {
             String userNameCookie = request.getCookies()[0].getValue();
 
             imageService.storeRelation(contextFilePath, userNameCookie, new Date().toString(), formItems.get(1).getString("UTF-8"),
-                    alpha + fileName.substring(fileName.lastIndexOf(".")));
+                    alpha);
 
             response.sendRedirect(request.getContextPath() + "/listTable.jsp");
         } catch (Exception e) {
