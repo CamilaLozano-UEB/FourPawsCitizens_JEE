@@ -3,103 +3,95 @@ package co.edu.unbosque.servlets;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.edu.unbosque.services.ImageService;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import edu.unbosque.services.UploadService;
-
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 @MultipartConfig
-@WebServlet(name = "UserUpload", urlPatterns = { "/user-upload" })
+@WebServlet(name = "UserUpload", urlPatterns = {"/user-upload"})
 public class UserUpload extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-		DiskFileItemFactory factory = new DiskFileItemFactory(1024 * 1024 * 3,
-				new File(System.getProperty("java.io.tmpdir")));
+        DiskFileItemFactory factory = new DiskFileItemFactory(1024 * 1024 * 3,
+                new File(System.getProperty("java.io.tmpdir")));
 
-		ServletFileUpload upload = new ServletFileUpload(factory);
+        ServletFileUpload upload = new ServletFileUpload(factory);
 
-		String uploadPath = getServletContext().getRealPath("./") + File.separator + "Images";
+        String uploadPath = getServletContext().getRealPath("./") + File.separator + "Images";
 
-		File uploadDir = new File(uploadPath);
-		if (!uploadDir.exists())
-			uploadDir.mkdirs();
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists())
+            uploadDir.mkdirs();
 
-		List<FileItem> formItems;
+        try {
+            List<FileItem> formItems = upload.parseRequest(request);
+            String fileName = new File(formItems.get(0).getName()).getName();
+            String alpha = getNameAlfaNumeric(fileName);
 
-		try {
-			formItems = upload.parseRequest(request);
+            formItems.get(0).write(new File(uploadPath + File.separator + alpha));
 
-			String fileName = new File(formItems.get(0).getName()).getName();
-			String filePath = uploadPath + File.separator + getNameAlfaNumeric()
-					+ fileName.substring(fileName.lastIndexOf("."), fileName.length());
+            ImageService imageService = new ImageService();
+            String contextFilePath = getServletContext().getRealPath("./") + File.separator + "Relation";
+            String userNameCookie = request.getCookies()[0].getValue();
 
-			formItems.get(0).write(new File(filePath));
+            imageService.storeRelation(contextFilePath, userNameCookie, new Date().toString(), formItems.get(1).getString("UTF-8"),
+                    alpha + fileName.substring(fileName.lastIndexOf(".")));
 
-			UploadService uploadService = new UploadService();
-			Cookie[] cookies = request.getCookies();
-			System.out.println(filePath);
+            response.sendRedirect(request.getContextPath() + "/listTable.jsp");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-			uploadService.storeRelation(getServletContext().getRealPath("./") + File.separator + "Relation",
-					cookies[0].getValue(), new Date().toString(), filePath, formItems.get(1).getString("UTF-8"));
+    private String getNameAlfaNumeric(String fileName) {
 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        byte[] bytearray = new byte[256];
+        String chain;
+        StringBuffer namePhoto;
+        String theAlphaNumericLower;
+        String theAlphaNumericUpper;
+        int i = 28;
 
-	}
+        new Random().nextBytes(bytearray);
+        chain = new String(bytearray, StandardCharsets.UTF_8);
 
-	private String getNameAlfaNumeric() {
+        namePhoto = new StringBuffer();
 
-		byte[] bytearray = new byte[256];
-		String chain;
-		StringBuffer namePhoto;
-		String theAlphaNumericLower;
-		String theAlphaNumericUpper;
-		int i = 28;
+        theAlphaNumericLower = chain.replaceAll("[^A-Z0-9]", "").toLowerCase();
+        theAlphaNumericUpper = chain.replaceAll("[^A-Z0-9]", "");
 
-		new Random().nextBytes(bytearray);
-		chain = new String(bytearray, Charset.forName("UTF-8"));
+        for (int m = 0; m < theAlphaNumericLower.length(); m++) {
 
-		namePhoto = new StringBuffer();
+            if (Character.isLetter(theAlphaNumericLower.charAt(m)) && (i > 0)
+                    || Character.isDigit(theAlphaNumericLower.charAt(m)) && (i > 0)
+                    || Character.isLetter(theAlphaNumericUpper.charAt(m)) && (i > 0)
+                    || Character.isDigit(theAlphaNumericUpper.charAt(m)) && (i > 0)) {
+                if (i % 2 == 0) {
+                    namePhoto.append(theAlphaNumericUpper.charAt(m));
+                } else {
+                    namePhoto.append(theAlphaNumericLower.charAt(m));
+                }
+                i--;
+            }
+        }
 
-		theAlphaNumericLower = chain.replaceAll("[^A-Z0-9]", "").toLowerCase();
-		theAlphaNumericUpper = chain.replaceAll("[^A-Z0-9]", "");
-
-		for (int m = 0; m < theAlphaNumericLower.length(); m++) {
-
-			if (Character.isLetter(theAlphaNumericLower.charAt(m)) && (i > 0)
-					|| Character.isDigit(theAlphaNumericLower.charAt(m)) && (i > 0)
-					|| Character.isLetter(theAlphaNumericUpper.charAt(m)) && (i > 0)
-					|| Character.isDigit(theAlphaNumericUpper.charAt(m)) && (i > 0)) {
-				if (i % 2 == 0) {
-					namePhoto.append(theAlphaNumericUpper.charAt(m));
-				} else {
-					namePhoto.append(theAlphaNumericLower.charAt(m));
-				}
-				i--;
-			}
-		}
-
-		return namePhoto.toString();
-	}
+        return namePhoto.toString() + fileName.substring(fileName.lastIndexOf("."));
+    }
 
 }
