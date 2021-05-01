@@ -18,19 +18,21 @@ public class DownloadImage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        String name = "NyZxU8ZxLwXoIy8hRkChZs44HnCe.png";
+        String path = this.getServletContext().getRealPath("/Images/" + name);
+        String fileName = path.substring(path.lastIndexOf("\\") + 1);
         response.setContentType("image/jpg/png");
-        response.setHeader("Content-disposition", "attachment; filename=sample.txt");
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+        try(InputStream in =request.getServletContext().getResourceAsStream("/Images/" + name);
+            OutputStream out = response.getOutputStream()) {
 
-        try (InputStream input = request.getServletContext().getResourceAsStream("/WEB-INF/index.html");
-             OutputStream output = response.getOutputStream()) {
-
-            byte[] memory = new byte[1048];
-
-            int memorynumber;
-            while (0 < (memorynumber = input.read(memory))) {
-                output.write(memory, 0, memorynumber);
+            byte[] buffer = new byte[1048];
+            int numBytesRead;
+            while ((numBytesRead = in.read(buffer)) >0) {
+                System.out.print(numBytesRead+"No esta entrando");
+                out.write(buffer, 0, numBytesRead);
             }
         }
+
     }
 }
