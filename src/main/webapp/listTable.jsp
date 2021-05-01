@@ -27,7 +27,7 @@
     function printTable(servlet) {
 
         const xhr = new XMLHttpRequest();
-        var url = '${pageContext.request.contextPath}/' + servlet;
+        const url = '${pageContext.request.contextPath}/' + servlet;
         console.log(window.location.pathname)
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
