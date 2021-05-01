@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="FourPawsCitizens_JEE-0.0.1-SNAPSHOT.war">
+    <root id="archive" name="FourPawsCitizens_JEE-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="FourPawsCitizens_JEE:war exploded" />
     </root>
   </artifact>
