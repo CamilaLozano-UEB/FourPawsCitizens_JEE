@@ -22,7 +22,7 @@ public class ListImageServlet extends HttpServlet {
         ImageService imageService = new ImageService();
 
         List<Image> images = imageService.listImages(getServletContext().getRealPath("./") +
-                File.separator + "Relation", request.getCookies()[0].getValue());
+                File.separator + "Relation", request.getCookies()[1].getValue());
         String imagesJsonString = new Gson().toJson(images);
 
         PrintWriter out = response.getWriter();
