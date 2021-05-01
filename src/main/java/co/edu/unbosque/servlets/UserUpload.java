@@ -49,11 +49,12 @@ public class UserUpload extends HttpServlet {
 
             ImageService imageService = new ImageService();
             String contextFilePath = getServletContext().getRealPath("./") + File.separator + "Relation";
-            String userNameCookie = request.getCookies()[1].getValue();
+            String userNameCookie = "";
             Cookie[] cookies = request.getCookies();
             for (int i = 0; i < cookies.length; i++) {
-                System.out.println(cookies[i].getValue());
-
+                if (cookies[i].getName().equals("userName")) {
+                    userNameCookie = cookies[i].getValue();
+                }
             }
 
             imageService.storeRelation(contextFilePath, userNameCookie, new Date().toString(), formItems.get(1).getString("UTF-8"),

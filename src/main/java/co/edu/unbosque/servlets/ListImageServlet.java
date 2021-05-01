@@ -20,9 +20,15 @@ public class ListImageServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         ImageService imageService = new ImageService();
-
+        String userNameCookie = "";
+        Cookie[] cookies = request.getCookies();
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("userName")) {
+                userNameCookie = cookies[i].getValue();
+            }
+        }
         List<Image> images = imageService.listImages(getServletContext().getRealPath("./") +
-                File.separator + "Relation", request.getCookies()[1].getValue());
+                File.separator + "Relation", userNameCookie);
         String imagesJsonString = new Gson().toJson(images);
 
         PrintWriter out = response.getWriter();

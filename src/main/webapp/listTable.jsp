@@ -20,6 +20,9 @@
     <tbody id="imageTable">
     </tbody>
 </table>
+<form method="get" action="DownloadImageServlet">
+    <input type="submit" value="Download"/>
+</form>
 <script>
     function printTable(servlet) {
 
