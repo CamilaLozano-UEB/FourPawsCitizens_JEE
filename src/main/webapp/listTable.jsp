@@ -20,9 +20,6 @@
     <tbody id="imageTable">
     </tbody>
 </table>
-<form method="get" action="DownloadImageServlet">
-    <input type="submit" value="Download"/>
-</form>
 <script>
     function printTable(servlet) {
 
@@ -46,10 +43,21 @@
 
                     let tableImage = document.createElement("img");
                     tableImage.src = '${pageContext.request.contextPath}/' + "Images/" + image[imageAtr[2]];
-                    console.log(image[imageAtr[2]])
+                    tableImage.style="width: 500px; height: 250px;";
                     tRow.appendChild(document.createElement("td").appendChild(tableImage));
 
+                    let tData = document.createElement("td");
+                    const button = document.createElement("button");
+                    button.textContent = "Download";
+                    button.style = "text-decoration: none;padding: 10px;font-weight: 600;font-size: 20px;color: #ffffff;background-color: #1883ba;border-radius: 6px;border: 2px solid #0016b0;";
+                    addButtonEventListener(button);
+                    button.className = "DownL";
+                    button.id = image[imageAtr[2]];
+                    tData.appendChild(button);
+                    tRow.appendChild(tData);
+
                     tBody.appendChild(tRow);
+
                 })
             }
         }
@@ -60,6 +68,14 @@
 
     printTable("ListImageServlet")
 
+    function addButtonEventListener(button) {
+        button.addEventListener("click", function () {
+
+            const namePhoto = button.id;
+            namePhoto.name= "PhotoDL";
+            location.href= "DownloadImageServlet?var="+namePhoto;
+        })
+    }
 </script>
 </body>
 </html>

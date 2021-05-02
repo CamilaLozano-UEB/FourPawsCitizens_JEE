@@ -10,16 +10,18 @@ import java.nio.file.Files;
 public class DownloadImageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String mime = Files.probeContentType(new File(getServletContext().getRealPath("./") +
-                File.separator + "Images/7q9zZdSpQaUkNdHxOv0nFfSnD6P9.jpg").toPath());
-        System.out.println(mime);
-        response.setContentType(mime);
 
-        response.setHeader("Content-disposition", "attachment; filename=7q9zZdSpQaUkNdHxOv0nFfSnD6P9.jpg");
-        System.out.println("eqwnfdjkwebjoBFVJOABVJIEAHV");
+        String photo= request.getParameter("var");
+        String mime = Files.probeContentType(new File(getServletContext().getRealPath("./") +
+                File.separator + "Images/"+photo).toPath());
+
+        response.setContentType(mime);
+        response.setHeader("Content-disposition", "attachment; filename="+photo);
+
         OutputStream out = response.getOutputStream();
         FileInputStream in = new FileInputStream(getServletContext().getRealPath("./") +
-                File.separator + "Images/7q9zZdSpQaUkNdHxOv0nFfSnD6P9.jpg");
+                File.separator + "Images/"+photo);
+
         byte[] buffer = new byte[4096];
         int length;
         while ((length = in.read(buffer)) > 0){
