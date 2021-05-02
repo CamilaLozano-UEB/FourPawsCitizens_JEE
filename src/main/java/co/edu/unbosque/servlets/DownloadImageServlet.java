@@ -8,6 +8,12 @@ import java.nio.file.Files;
 
 @WebServlet(name = "DownloadImageServlet", value = "/DownloadImageServlet")
 public class DownloadImageServlet extends HttpServlet {
+    /**
+     *The method obtains the name of the image, looks for its path and then downloads it.
+     *
+     * @param request,  element that allows to obtain the name of the entered image
+     * @param response, element that lets you know how to handle the file to download
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

@@ -14,6 +14,13 @@ import java.util.List;
 
 @WebServlet(name = "ListImageServlet", value = "/ListImageServlet")
 public class ListImageServlet extends HttpServlet {
+    /**
+     *The method verificate the userName by the cookies and define the content as json,
+     * then define the image and convert the image to json.
+     *
+     * @param request,  element that brings all cookies
+     * @param response, element that lets you know how to handle the json
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
@@ -29,6 +36,7 @@ public class ListImageServlet extends HttpServlet {
         }
         List<Image> images = imageService.listImages(getServletContext().getRealPath("./") +
                 File.separator + "Relation", userNameCookie);
+
         String imagesJsonString = new Gson().toJson(images);
 
         PrintWriter out = response.getWriter();

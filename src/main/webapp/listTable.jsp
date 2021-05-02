@@ -8,6 +8,7 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <body>
+<!--It is the table and the corresponding titles ordered-->
 <table class="table table-striped">
     <thead>
     <tr>
@@ -21,14 +22,18 @@
     </tbody>
 </table>
 <script>
+    /**
+     * This method allows filling the table in order, adding the date, the image and the download button.
+     * Also defines the style of images and buttons.
+     *
+     * @param servlet, it is a jsp element which allows to fill the table
+     */
     function printTable(servlet) {
 
         const xhr = new XMLHttpRequest();
         const url = '${pageContext.request.contextPath}/' + servlet;
-        console.log(window.location.pathname)
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
-                console.log(xhr.responseText)
                 const imageData = JSON.parse(xhr.responseText);
                 const tBody = document.getElementById("imageTable");
                 const imageAtr = ["uploadDate", "description", "path"];
@@ -61,13 +66,18 @@
                 })
             }
         }
-        console.log("asdasfasf")
         xhr.open('GET', '${pageContext.request.contextPath}/' + servlet, true);
         xhr.send();
     }
 
     printTable("ListImageServlet")
 
+    /**
+     *Add a listener to each button, which when clicked,
+     *connects with DownloadImageServlet and passes the name of the corresponding photo
+     *
+     *@param button, element to which the event listener is going to be added
+     */
     function addButtonEventListener(button) {
         button.addEventListener("click", function () {
 

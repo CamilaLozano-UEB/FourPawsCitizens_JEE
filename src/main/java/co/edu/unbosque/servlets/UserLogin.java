@@ -25,6 +25,7 @@ public class UserLogin extends HttpServlet {
         response.setContentType("text/html");
 
         String name = request.getParameter("userName");
+        name=name.replace(",","").replace(";","").replace(" ", "");
         try {
             // Creating a cookie
             Cookie c1 = new Cookie("userName", name);

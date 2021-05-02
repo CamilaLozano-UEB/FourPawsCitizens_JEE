@@ -5,3 +5,28 @@
     border-radius: 5px;
     border: 1px solid #39c;
 }
+/* Centers all the text of the login and image add forms. Also put the background image */
+body {
+    text-align: center;
+    background-image: url('https://image.freepik.com/vector-gratis/adorable-husky-siberiano-fisuras-patron-repetitivo-fondo-pantalla-lindo-fondo-transparente_42349-859.jpg');
+}
+/* Centers all the fields of the index-cookies.html. Also defines the color of the div */
+.order{
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    background:#f6d3d4 ;
+    border-radius: 15px;
+    border: 10px solid #f6d3d4;
+    box-shadow: 8px 8px 10px 0px #818181;
+}
+/* Centers all the fields of the index.html. Also defines the color of the div*/
+.order2{
+    background: #f6d3d4 ;
+    border-radius: 15px;
+    border: 10px solid #f6d3d4;
+    box-shadow: 8px 8px 10px 0px #818181;
+    position: absolute;
+    top: 30%;
+    left: 35%;
+}

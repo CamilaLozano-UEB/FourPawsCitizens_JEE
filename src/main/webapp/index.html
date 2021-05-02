@@ -5,23 +5,25 @@
     <title>Login Servlet</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="CSS/Styles.css" type="text/css">
 </head>
 <body>
 <!--Form that is displayed after the login, collects the image and its description -->
-<form action="user-upload" method="post" enctype="multipart/form-data">
-    <fieldset>
-        <legend>Formulario de Carga de Fotografias</legend>
-        <br> <label for="imageUpdate"> Imagen de la mascota: </label> <br>
-        <input type="file" name="imageUpdate" id="imageUpdate" required>
-        <br> <br> <label for="Description">Descripción de
-        la fotografía: </label> <br> <input type="text" name="Description"
-                                            id="Description" placeholder="Fotografia de un pastór belga"
-                                            size="30" required> <input type="submit"
-                                                                       class="btn btn-primary" value="Upload"
-                                                                       onclick="verificate()">
-    </fieldset>
-</form>
-
+<div class="order2">
+    <form action="user-upload" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Formulario de Carga de Fotografias</legend>
+            <br> <label for="imageUpdate"> Imagen de la mascota: </label> <br>
+            <input type="file" name="imageUpdate" id="imageUpdate" required>
+            <br> <br> <label for="Description">Descripción de
+            la fotografía: </label> <br> <input type="text" name="Description"
+                                                id="Description" placeholder="Fotografia de un pastór belga"
+                                                size="30" required> <input type="submit"
+                                                                           class="btn btn-primary" value="Upload"
+                                                                           onclick="verificate()">
+        </fieldset>
+    </form>
+</div>
 <!--Verify that the image field and the description are not empty. Also verify that the image is .png or .jpg-->
 
 <script type="text/javascript">

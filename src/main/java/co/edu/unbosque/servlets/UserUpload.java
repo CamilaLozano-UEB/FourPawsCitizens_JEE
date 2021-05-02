@@ -23,9 +23,17 @@ import java.util.Random;
 @MultipartConfig
 @WebServlet(name = "UserUpload", urlPatterns = {"/user-upload"})
 public class UserUpload extends HttpServlet {
-
+    /**
+     * constant for when a class has an extends
+     */
     private static final long serialVersionUID = 1L;
-
+    /**
+     *The method save the image and description with the corresponding user and calculate the date.
+     * Finally pass the information for write and redirect to listTable.jsp
+     *
+     * @param request,  element that brings all cookies
+     * @param response, element that redirect to listTable.jsp
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -65,6 +73,12 @@ public class UserUpload extends HttpServlet {
             e.printStackTrace();
         }
     }
+    /****
+     *This method make the name alfanumeric of the image with 28 characters in upper and lower case
+     *
+     * @param fileName, it's the file name where will be the image
+     * @return namePhoto.toString() + fileName.substring(fileName.lastIndexOf(".")), it's the new name of the image with type of file
+     * ****/
 
     private String getNameAlfaNumeric(String fileName) {
 
