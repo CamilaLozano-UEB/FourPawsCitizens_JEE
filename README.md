@@ -33,8 +33,10 @@
 		<br>
 	<dt><h2><em> 7. Intrucciones de Uso </em></h2></dt>
 	<dd><b>7.1</b>Para iniciar el servidor, primero debe configuar el servidor de aplicaciones, en este caso se usó Tomcat por lo que debe ajustarlo y correrlo con las idicaciones del IDE de su preferencia. </dd>
-	<dd><b>7.2</b> Cuando el servidor este en linea podra iniciar con un nombre de usuario que sera guardado por si desea volver a iniciar de nuevo. </dd>
-	<dd><b>7.3</b> Cuando haya ingresado con su usuario, seleccione una imagen tipo .png o .jpg. Cuando la imagen este subida ingrese una descripción para este y suba el formulario con el botón de "Upload". </dd>
-	<dd><b>7.4</b> Si realizo el paso anterior correctamente podra visualizar una tabla con la fecha de carga, la descripción, la foto y un botón que le permitira descargar la fotografia subida en el anterior paso. </dd>
+	<dd><b>7.2</b> Cuando el servidor este en linea podra iniciar con un nombre de usuario que sera guardado por si desea volver a iniciar de nuevo. Tras ingresar su usuario presione el botón "Login" para registrarse. </dd>
+	<dd><b>7.3</b> Cuando haya ingresado con su usuario, seleccione una imagen tipo .png o .jpg. Cuando la imagen este cargada en el formulario, ingrese una descripción para este y suba el formulario con el botón de "Upload". </dd>
+	<dd><b>7.4</b> Si realizo el paso anterior correctamente podra visualizar una tabla con la fecha de carga, la descripción, la foto y un botón que le permitira descargar la fotografia de su preferencia. </dd>
+	<dd><b>7.5</b> Puede ingresar varias veces con su usuario y por cada foto que suba en su sesión podra visualizar las imagenes totales que se cargaron. </dd>
+	<dd><b>7.6</b> Si cambia de sesión e inicia con otro usuario no tendra acceso a las fotos e información que no sea en la que esta en ese momento</dd>
 	</dl>
 </html>
