@@ -12,9 +12,18 @@ import javax.ejb.Singleton;
 
 @Singleton
 public class ImageService implements ImageRepository {
-
     private final String FILE_PATH = "/imageRelation.txt";
 
+    /**
+     * Method that writes the flat file with the parameter data and saves them.
+     *
+     * @param contextFilePath, text path
+     * @param userName,        user who saved the image
+     * @param uploadDate,      image upload date
+     * @param description,     image description
+     * @param imagePath,       image path
+     * @throws IOException
+     */
     @Override
     public void storeRelation(String contextFilePath, String userName, String uploadDate, String description, String imagePath)
             throws IOException {
@@ -31,6 +40,16 @@ public class ImageService implements ImageRepository {
 
     }
 
+    /**
+     * * Method that reads the imageRelation.txt txt. Verify that they are from the same user,
+     * take the images to return an image object and save them in a list of images of the user
+     * to which they correspond
+     *
+     * @param contextFilePath, text path
+     * @param userName,        user who saved the image
+     * @return
+     * @throws IOException
+     */
     @Override
     public List<Image> listImages(String contextFilePath, String userName) throws IOException {
 

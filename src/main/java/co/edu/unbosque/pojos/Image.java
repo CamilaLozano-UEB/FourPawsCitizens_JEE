@@ -5,6 +5,12 @@ public class Image {
     private String description;
     private String path;
 
+    /**
+     *  Constructor of the class Image
+     * @param uploadDate, image upload date
+     * @param description, image description
+     * @param path, image path
+     */
     public Image(String uploadDate, String description, String path) {
         this.uploadDate = uploadDate;
         this.description = description;
